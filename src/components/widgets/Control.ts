@@ -74,7 +74,7 @@ export class Control extends EventEmitter {
     private parsingMouseFrame = false
     absoluteValues: PhisicalValues = { x: 0, y: 0, width: 0, height: 0 }
     children: InPageWidgetBuilder
-    draggable = true
+    draggable = false
     dragging = false
     private dragStart: { x: number, y: number } = { x: 0, y: 0 }
     focused = false

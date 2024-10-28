@@ -317,28 +317,6 @@ export class Control extends EventEmitter {
                 this.emit("hoverOut", event)
             }
         }
-        if (!this.draggable) return
-        if (event.name === "MOUSE_DRAG" && event.data.left === true && this.dragging === false && this.focused) {
-            // check if the mouse is on the header of the popup (first three lines)
-            if (x > this.absoluteValues.x && x <= this.absoluteValues.x + this.absoluteValues.width && y > this.absoluteValues.y && y <= this.absoluteValues.y + this.absoluteValues.height) {
-                this.dragging = true
-                this.dragStart = { x: x, y: y }
-            }
-        } else if (event.name === "MOUSE_DRAG" && event.data.left === true && this.dragging === true) {
-            if ((y - this.dragStart.y) + this.absoluteValues.y < 0) {
-                return // prevent the popup to go out of the top of the screen
-            }
-            if ((x - this.dragStart.x) + this.absoluteValues.x < 0) {
-                return // prevent the popup to go out of the left of the screen
-            }
-            this.absoluteValues.x += x - this.dragStart.x
-            this.absoluteValues.y += y - this.dragStart.y
-            this.dragStart = { x: x, y: y }
-            this.CM.refresh()
-        } else if (event.name === "MOUSE_LEFT_BUTTON_RELEASED" && this.dragging === true) {
-            this.dragging = false
-            this.CM.refresh()
-        }
     }
 
     /**
